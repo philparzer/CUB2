@@ -16,16 +16,20 @@ startButton.addEventListener("click", async () => {
     });
   });
   
-  //injected script
+  //injected script TODO: refactor into seperate module?
   function mainInject() {
       document.body.style.backgroundColor = "black";
       document.body.style.color = "white";
       
       //get selected text on page
     document.addEventListener('mouseup', event => {  
-      if (window.getSelection().toString().length !== 0) {
-          let selectedText = window.getSelection().toString();  
-          console.log(selectedText);     
+      if (window.getSelection().toString().length !== 0) { // TODO: implement some regex tests e.g. if string only contains spaces
+
+        //check if string is only one word
+        if (/^[a-zA-Z]+$/.test(window.getSelection().toString())) {
+            let selectedText = window.getSelection().toString();  
+            console.log(selectedText); 
+          }
       }
 
       //TODO: get doc language

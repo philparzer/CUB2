@@ -1,12 +1,12 @@
 {
     "name": "CUB2",
-    "description": "New words shouldn't be intimitating",
+    "description": "New words shouldn't be intimidating",
     "version": "1.0",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
       },
-    "permissions": ["storage", "activeTab", "scripting"],
+    "permissions": ["storage", "activeTab", "scripting", "no-cors"],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
@@ -22,10 +22,5 @@
     "48": "/images/cub2_logo48.png",
     "128": "/images/cub2_logo128.png"
     },
-    "options_page": "options.html",
-    "content_scripts": [
-        {
-          
-        }
-    ]
+    "options_page": "options.html"
   }

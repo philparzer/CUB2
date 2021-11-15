@@ -18,17 +18,21 @@ startButton.addEventListener("click", async () => {
   
   //injected script TODO: refactor into seperate module?
   function mainInject() {
-      document.body.style.backgroundColor = "black";
+      document.body.style.backgroundColor = "red";
       document.body.style.color = "white";
       
       //get selected text on page
     document.addEventListener('mouseup', event => {  
       if (window.getSelection().toString().length !== 0) { // TODO: implement some regex tests e.g. if string only contains spaces
 
-        //check if string is only one word
-        if (/^[a-zA-Z]+$/.test(window.getSelection().toString())) {
-            let selectedText = window.getSelection().toString();  
-            console.log(selectedText); 
+        //check if string is only one word with space at end
+        if (/^[a-zA-Z]+\s$/.test(window.getSelection().toString())) {
+            let selectedText = window.getSelection().toString();
+            let selectedParentElement = window.getSelection().getRangeAt(0).startContainer.parentNode;
+            
+            selectedText = selectedText.substring(0, selectedText.length - 1);
+            console.log(selectedText.length);
+            console.log(selectedText);
           }
       }
 

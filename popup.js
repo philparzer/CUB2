@@ -31,6 +31,7 @@ startButton.addEventListener("click", async () => {
         if (window.getSelection().toString().match(/^[\u00C0-\u1FFF\u2C00-\uD7FF\w]+$/) || window.getSelection().toString().match(/^[\u00C0-\u1FFF\u2C00-\uD7FF\w]\s+$/) ) {
             let selectedText = window.getSelection().toString();
             console.log(selectedText);
+            //TODO: try replacing whitespace in string
             //get wiktionary data
             fetch("https://en.wiktionary.org/wiki/" + selectedText) //TODO: CORS?
             .then(response => response.text())
@@ -38,18 +39,17 @@ startButton.addEventListener("click", async () => {
                 console.log(html);
 
                 //parse string to get en definition
-                let defRegex = /\<ol\>\<li\>.*\<\/ol\>/;
+                let defRegex = /\<ol\>\<li\>.*\<\/ol\>/; //this doesn't work for verbs
                 let anchorDef = /\<a href=\"\/wiki\/[\u00C0-\u1FFF\u2C00-\uD7FF\w]+(\"|#).*/;
 
-                let regMatch = html.match(defRegex)
-                console.log("HTML MATCH " + regMatch)
+                let regMatch = html.match(defRegex);
+                console.log("HTML MATCH " + regMatch);
                 let matchedAnchor = regMatch[0].match(anchorDef)[0];
                 console.log("Matched Anchor" + matchedAnchor);
 
 
                 let startIndex = matchedAnchor.indexOf('wiki\/') + 5;
                 let endIndex = startIndex;
-
 
                 for (let i = startIndex; i < matchedAnchor.length; i++) {
                     if (matchedAnchor[i] === '"' || matchedAnchor[i] === '#') {
